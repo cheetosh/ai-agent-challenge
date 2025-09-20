@@ -1,0 +1,26 @@
+# ============================================================
+# Requirements for AI Agent – Bank Statement PDF Parser
+# ------------------------------------------------------------
+# This file lists all dependencies needed to run the project.
+# Includes AI generation, PDF parsing, data handling,
+# testing, and optional performance libraries.
+# ============================================================
+
+# --- Core dependencies ---
+google-generativeai>=0.7.1   # Google Gemini API client
+pandas>=2.0.0                # DataFrame handling
+numpy>=1.20.0                # Numerical computations
+
+# --- PDF processing ---
+pypdf>=4.0.0                 # PDF parsing backend
+pdfplumber>=0.10.0           # High-level PDF text/table extraction
+
+# --- Agent framework ---s
+langgraph>=0.2.0             # Workflow orchestration for agents
+langchain-core>=0.2.0        # Core utilities for LangChain agents
+
+# --- Testing ---
+pytest>=8.0.0                # Unit testing framework
+
+# --- Optional (performance) ---
+orjson>=3.9.0                # Ultra-fast JSON parsing/serialization
