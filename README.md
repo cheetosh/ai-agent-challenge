@@ -11,15 +11,18 @@ The goal is to build a self-improving coding agent that, when given a new bank�
 
 🏗️ How the Agent Works
 The agent operates in a plan → generate → test → refine cycle:
-
-┌────────────┐     ┌──────────────┐     ┌────────────┐     ┌──────────────┐
-│   Planner  │ →   │  Code Writer │ →   │   Tester   │ →   │   Success?   │
-└────────────┘     └──────────────┘     └────────────┘     └──────────────┘
-                                                                    |
-                                                                    ▼
-                                                        ┌─────────────────────────┐
-                                                        │   Self-Correction (≤3x) │
-                                                        └─────────────────────────┘
+```
+┌─────────┐    ┌──────────────┐    ┌─────────────┐    ┌─────────────┐
+│ Planner │───▶│ Code Gen    │───▶│ Code Test  │───▶│ Success?   │
+│         │    │             │    │             │    │             │
+└─────────┘    └──────────────┘    └─────────────┘    └─────────────┘
+                                                           │
+                                                           ▼
+                                                ┌─────────────────┐
+                                                │ Self-Correct    │
+                                                │ (≤3 attempts)   │
+                                                └─────────────────┘
+```
 
 Main Components:
 - Planner → inspects PDF + CSV to design a parsing approach
@@ -55,19 +58,21 @@ The agent will:
 python -m pytest tests/test_icici_parser.py -v
 
 📂 Repository Layout
+```
 Karbon-AI-agent/
-├── agent.py                  # Core agent logic
-├── custom_parsers/           # Auto-generated parsers
-│   └── icici_parser.py
-├── data/                     # Bank statement samples
+├── agent.py                 # Main AI agent implementation
+├── custom_parsers/          # Generated parser modules
+│   ├── __init__.py
+│   └── icici_parser.py     # Example parser for ICICI bank
+├── data/                    # Sample data for different banks
 │   └── icici/
-│       ├── icici_sample.pdf
-│       └── icici_sample.csv
-├── tests/                    # Unit tests for parsers
+│       ├── icic_sample.pdf # Sample PDF statement
+│       └── icic_sample.csv # Expected CSV output
+├── tests/                   # Test files
 │   └── test_icici_parser.py
-├── requirements.txt          # Dependencies
-└── README.md
-
+├── requirements.txt         # Python dependencies
+└── README.md               # This file
+```
 🔧 Behind the Scenes
 Workflow: Plan → Analyze PDF + schema → Generate code → Test → Retry → Verified parser
 
